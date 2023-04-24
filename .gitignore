@@ -1,5 +1,5 @@
 data
 results
-scripts/preprocesamiento
-
-
+scripts/preprocesamiento/conn
+scripts/preprocesamiento/preprocessing_batchs
+DTI
