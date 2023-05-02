@@ -1,0 +1,13 @@
+main_dir = '/home/usuario/disco1/proyectos/2023-resting-state-estados-fMRI_conn/';
+session_list = dir([main_dir, '/data/sub01']);
+session_list(1:2) = [];
+
+for iSess=1:length(session_list)
+    %conditions are concatenated so we need to split them
+    cond_header = spm_vol([main_dir, '/data/sub01/', sessionName, '/func-resting/', sessionName, '-resting.nii']);
+    cond_data = spm_read_vols(cond_header);
+    cond_data = reshape(cond_data, 91*109*91, 600);
+   for iCond=1:4
+       
+   end
+end

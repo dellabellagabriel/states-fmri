@@ -17,7 +17,7 @@ for iSess=1:length(session_list)
     
     display(sessionName);
     
-    cd([main_dir, '/data/sub01/', sessionName, '/']);
+    cd([main_dir, '/data/sub01/', sessionName, '/functional']);
     cond_list = dir('.');
     cond_list(1:2) = [];
     
