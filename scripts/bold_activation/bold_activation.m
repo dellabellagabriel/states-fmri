@@ -25,7 +25,7 @@ session_list = dir(fullfile(main_dir, 'data/sub01'));
 session_list(1:2) = [];
 
 
-for iSess=1:length(session_list)
+for iSess=1:length(session_list)-1
     sessionName = session_list(iSess).name;
     
     display(sessionName);
@@ -54,7 +54,7 @@ end
 
 %%
 figure    
-plot(-pre_period+1:post_period+1,zscore(mean(D_seed)))
+plot(-pre_period+1:post_period+1,zscore(mean(D_seed)), 'linewidth', 2, 'color',[1, 0.2, 0])
 hold on
 plot([0 0 ],[-11 11],'linestyle','--','color','k')
 ylim([-1.5 2])
@@ -64,7 +64,7 @@ title('precuneus')
     
 
 figure    
-plot(-pre_period+1:post_period+1,zscore(mean(D_gray)))
+plot(-pre_period+1:post_period+1,zscore(mean(D_gray)), 'linewidth', 2, 'color',[1, 0.2, 0])
 hold on
 plot([0 0 ],[-11 11],'linestyle','--','color','k')
 ylim([-2 2.2])
@@ -73,7 +73,7 @@ ylabel('BOLD')
 title('toda la materia gris')
 
 figure    
-plot(-pre_period+1:post_period+1,zscore(mean(D_all)))
+plot(-pre_period+1:post_period+1,zscore(mean(D_all)), 'linewidth', 2, 'color',[1, 0.2, 0])
 hold on
 plot([0 0 ],[-11 11],'linestyle','--','color','k')
 ylim([-2 2.2])

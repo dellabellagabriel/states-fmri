@@ -4,7 +4,9 @@
 
 path_to_dicom="/home/usuario/disco1/proyectos/2023-resting-state-estados-fMRI_conn/data/sub01"
 
-for session in $path_to_dicom/*; do
+
+#for session in $path_to_dicom/*; do
+for session in "$path_to_dicom/session08-20230502"; do
 
 	echo $session
 

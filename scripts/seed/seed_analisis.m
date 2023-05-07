@@ -60,3 +60,21 @@ for iSess=1:length(session_list)
    spm_write_vol(cond_export_header, diff_41);
    
 end
+
+%export averaging sessions
+C_all_sessions = squeeze(mean(C));
+
+cond_1_header = cond_header(1);
+cond_1_header.fname = [results_dir, '/', seed_name, '/', 'all_sessions_diferencia_2-1', '.nii'];
+diff_21 = reshape(C_all_sessions(2, :)-C_all_sessions(1, :), 91,109,91);
+spm_write_vol(cond_1_header, diff_21);
+
+cond_1_header = cond_header(1);
+cond_1_header.fname = [results_dir, '/', seed_name, '/', 'all_sessions_diferencia_3-1', '.nii'];
+diff_31 = reshape(C_all_sessions(3, :)-C_all_sessions(1, :), 91,109,91);
+spm_write_vol(cond_1_header, diff_31);
+
+cond_1_header = cond_header(1);
+cond_1_header.fname = [results_dir, '/', seed_name, '/', 'all_sessions_diferencia_4-1', '.nii'];
+diff_41 = reshape(C_all_sessions(4, :)-C_all_sessions(1, :), 91,109,91);
+spm_write_vol(cond_1_header, diff_41);

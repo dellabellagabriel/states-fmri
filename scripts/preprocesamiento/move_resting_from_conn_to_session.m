@@ -8,7 +8,7 @@ sessions_dir = '/home/usuario/disco1/proyectos/2023-resting-state-estados-fMRI_c
 session_files = dir(sessions_dir);
 session_files(1:2) = []; %remove . and ..
 
-for i=1:length(session_files)
+for i=8:length(session_files)
    display(['Copying session ', num2str(i), ' ...'])
    copyfile([conn_dir,'/',conn_files(i).name], [sessions_dir,'/',session_files(i).name,'/func-resting/']) 
    movefile([sessions_dir,'/',session_files(i).name,'/func-resting/',conn_files(i).name], [sessions_dir,'/',session_files(i).name,'/func-resting/',session_files(i).name,'-resting.nii'])
