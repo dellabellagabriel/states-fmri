@@ -16,16 +16,17 @@ graymask = spm_read_vols(graymask);
 graymask = logical(reshape(graymask, 1, 91*109*91));
 
 %chequear notas.txt
-thresh = [18,30,13,14,8,15,18];
+thresh = [18,30,13,14,8,15,18, 10, 12, 18];
 
-pre_period = 7;
-post_period = 7;
+
+pre_period = 5;
+post_period = 5;
 
 session_list = dir(fullfile(main_dir, 'data/sub01'));
 session_list(1:2) = [];
 
 
-for iSess=1:length(session_list)-1
+for iSess=1:length(session_list)
     sessionName = session_list(iSess).name;
     
     display(sessionName);
@@ -54,29 +55,29 @@ end
 
 %%
 figure    
-plot(-pre_period+1:post_period+1,zscore(mean(D_seed)), 'linewidth', 2, 'color',[1, 0.2, 0])
+plot(-pre_period:post_period,zscore(mean(D_seed)), 'linewidth', 2, 'color',[1, 0.2, 0])
 hold on
 plot([0 0 ],[-11 11],'linestyle','--','color','k')
-ylim([-1.5 2])
+ylim([-1.5 3])
 xlabel('tiempo')
 ylabel('BOLD')
 title('precuneus')
     
 
 figure    
-plot(-pre_period+1:post_period+1,zscore(mean(D_gray)), 'linewidth', 2, 'color',[1, 0.2, 0])
+plot(-pre_period:post_period,zscore(mean(D_gray)), 'linewidth', 2, 'color',[1, 0.2, 0])
 hold on
 plot([0 0 ],[-11 11],'linestyle','--','color','k')
-ylim([-2 2.2])
+ylim([-2 4])
 xlabel('tiempo')
 ylabel('BOLD')
 title('toda la materia gris')
 
 figure    
-plot(-pre_period+1:post_period+1,zscore(mean(D_all)), 'linewidth', 2, 'color',[1, 0.2, 0])
+plot(-pre_period:post_period,zscore(mean(D_all)), 'linewidth', 2, 'color',[1, 0.2, 0])
 hold on
 plot([0 0 ],[-11 11],'linestyle','--','color','k')
-ylim([-2 2.2])
+ylim([-2 3])
 xlabel('tiempo')
 ylabel('BOLD')
 title('toda la cabeza')

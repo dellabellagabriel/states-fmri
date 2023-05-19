@@ -14,7 +14,7 @@ roi_id = importdata([mask_dir, '/rois264_identity.txt']);
 
 output_dir = [main_dir, '/results/func_networks/', mask_name];
 
-for iSess=1:length(session_list)
+for iSess=9:length(session_list)
     sessionName = session_list(iSess).name;
     mkdir([output_dir,'/',sessionName])
     

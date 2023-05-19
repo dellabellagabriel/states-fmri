@@ -19,7 +19,7 @@ for iRoi=1:length(roi_salience)
 
     
     C = [];
-    for iSess=1:length(session_list)-2
+    for iSess=1:length(session_list)
         sessionName = session_list(iSess).name;
 
         display(sessionName);
@@ -43,7 +43,7 @@ end
 % average over regions
 CC = squeeze(mean(C, 3));
 header = cond_header(1);
-for i=1:length(session_list)-2
+for i=1:length(session_list)
    CC_trans = CC(i, 2, :) - CC(i, 1, :);
    CC_alter = CC(i, 3, :) - CC(i, 1, :);
    CC_recu = CC(i, 4, :) - CC(i, 1, :);
