@@ -8,7 +8,8 @@ sessions(1:2) = [];
 conditions = {'cond1', 'cond2', 'cond3', 'cond4'};
 condition_names = {'reposo', 'transicion', 'alteracion', 'recuperacion'};
 
-for s=1:length(sessions)
+for s=20:length(sessions)
+    disp(sessions(s).name)
     for c=1:4
         path_to_condition = strcat(sessions_dir,'/',sessions(s).name,'/functional/',conditions(c));
         cd(char(path_to_condition))
