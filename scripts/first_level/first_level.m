@@ -1,3 +1,5 @@
+clear,clc
+
 spm('defaults', 'FMRI');
 spm_jobman('initcfg');
 
@@ -24,7 +26,7 @@ for iSess=1:length(session_list)
    end
    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).scans = scans';
    
-   %set the conditions
+   %set the conditions (5 scans antes y despues)
     matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(1).name = 'before';
     matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(1).onset = onsets(iSess)-duration;
     matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(1).duration = duration;
@@ -39,6 +41,22 @@ for iSess=1:length(session_list)
     matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(2).pmod = struct('name', {}, 'param', {}, 'poly', {});
     matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(2).orth = 1;
     
+    %antes y despues todo
+    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(3).name = 'antes todo';
+    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(3).onset = 0;
+    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(3).duration = onsets(iSess);
+    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(3).tmod = 0;
+    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(3).pmod = struct('name', {}, 'param', {}, 'poly', {});
+    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(3).orth = 1;
+    
+    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(4).name = 'despues todo';
+    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(4).onset = onsets(iSess);
+    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(4).duration = 150-onsets(iSess);
+    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(4).tmod = 0;
+    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(4).pmod = struct('name', {}, 'param', {}, 'poly', {});
+    matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).cond(4).orth = 1;
+    
+    %regresores
     matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).multi = {''};
     matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).regress = struct('name', {}, 'val', {});
     matlabbatch{1}.spm.stats.fmri_spec.sess(iSess).multi_reg = {[main_dir, '/data/sub01/', session_list(iSess).name, '/functional/cond2/nii/rp_transicion.txt']};
