@@ -1,4 +1,5 @@
-clc,clear 
+clc,clear
+close all
 
 main_dir = '/home/usuario/disco1/proyectos/2023-resting-state-estados-fMRI_conn';
 
@@ -15,8 +16,8 @@ graymask = spm_read_vols(graymask);
 graymask = logical(reshape(graymask, 1, 91*109*91));
 
 %chequear notas.txt
-thresh = [18,30,13,14,8,15,18, 10, 12, 18 , 12, 7,16,8,17];
-
+thresh = [20, 26, 26, 19, 22, 26, 24, 19];
+%thresh = randi([20, 70], 1, 5);
 
 pre_period = 5;
 post_period = 50;
@@ -25,14 +26,14 @@ session_list = dir(fullfile(main_dir, 'data/sub01'));
 session_list(1:2) = [];
 
 is = 1;
-for iSess=1:length(session_list) 
+for iSess=8:length(session_list)
     sessionName = session_list(iSess).name;
     
     display(sessionName);
     
-    cd(fullfile(main_dir, 'data/sub01', sessionName, 'functional','cond2/smooth'));
+    cd(fullfile(main_dir, 'data/sub01', sessionName, 'functional','cond4/smooth'));
 
-    header = spm_vol('swautransicion.nii');
+    header = spm_vol('swaurecuperacion.nii');
     data = spm_read_vols(header);
 
     data = reshape(data,91*109*91,150);
