@@ -2,6 +2,7 @@ data
 results
 scripts/preprocesamiento/conn
 scripts/preprocesamiento/preprocessing_batchs
+scripts/brainstates/dataset
 DTI
 notas.txt
 *.m~
