@@ -14,17 +14,32 @@ C = zeros(length(session_list), 4, n_rois, n_rois); %correlation per node
 C_net = zeros(length(session_list), 4, 14, 14); %correlation per func network
 C_intra = zeros(length(session_list), 4, 14);
 C_inter = zeros(length(session_list), 4, 14);
-for iSess=1:length(session_list)-1
+for iSess=1:length(session_list)
     sessionName = session_list(iSess).name;
+    
+    display(sessionName)
     
    for iCond=1:4
     %correlation per node
     load([main_dir,'/results/func_networks/', roi, '/', sessionName,'/cond', num2str(iCond),'/func_roi.mat'])
-    C(iSess, iCond, :,:) = corrcoef(func_roi');
+    
+    %ignoramos el primer volumen por los nans de la sesion 8
+    if iSess == 8
+       func_roi = func_roi(:, 2:end); 
+    end
+    
+    C(iSess, iCond, :,:) = corr(func_roi', func_roi');
     
     %correlation per func network
     load([main_dir,'/results/func_networks/', roi, '/', sessionName,'/cond', num2str(iCond),'/func_network.mat'])
+    
+    %ignoramos el primer volumen por los nans de la sesion 8
+    if iSess == 8
+       roi_data = roi_data(:, 2:end); 
+    end
+    
     C_net(iSess, iCond, :, :) = corrcoef(roi_data');
+    
     
     for iNet=1:14
         func_networks_idx = func_networks_list == iNet;
@@ -40,6 +55,7 @@ for iSess=1:length(session_list)-1
    end
 end
 
+save([main_dir, '/results/connectivity/connectivity_264.mat'], 'C')
 save([main_dir, '/results/connectivity/connectivity.mat'], 'C_net')
 save([main_dir, '/results/connectivity/intra_connectivity.mat'], 'C_intra')
 save([main_dir, '/results/connectivity/inter_connectivity.mat'], 'C_inter')
